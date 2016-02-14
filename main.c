@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 14:57:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/13 00:14:40 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/14 17:11:50 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,8 @@ int main(void) {
     // info.term->prompt = NULL;
 
     char *command;
-    // char *tmp;
     while ((command = termcaps_readline(&info)))
     {
-        while (!check_cmd(command))
-        {
-            if (info.term->is_term)
-                ft_bzero(info.term->cmd, BUFFER_SIZE);
-            info.term->pos_c = 0;
-            strcat(command, termcaps_readline(&info));
-        }
         ft_print("%s\n", command);
         if (info.term->is_term)
             ft_bzero(info.term->cmd, BUFFER_SIZE);
