@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_termcaps.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/14 17:59:25 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/14 18:48:25 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,4 @@ int         termcap_winsz_y(void);
 char        *getnextline(int fd, t_info *info);
 
 int         check_cmd(char *cmd);
-char        *return_char(t_info *info, int term);
+char        *return_char(t_info *info);

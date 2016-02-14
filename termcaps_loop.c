@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/14 18:00:20 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/14 18:51:04 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 
 #include <unistd.h>
 
-char        *return_string(t_termcaps *term)
+char        *return_string(t_info *info)
 {
-    int len;
+    char        *tmp;
+    int         len;
+    t_termcaps  *term;
 
+    term = info->term;
     if ((len = ft_strlen(term->cmd)) != term->pos_c)
         move_cursor(term->capa, term->pos_c, ft_strlen(term->prompt), len);
     ft_putstr("\n");
-    return (term->cmd);
+    tmp = return_char(info);
+    return (tmp);
 }
 
 char        *termcaps_loop(t_info *info)
@@ -38,6 +42,5 @@ char        *termcaps_loop(t_info *info)
         termcaps_handle_keyboard(info, chr);
         chr = 0;
     }
-    termcaps_save(0);
-    return ((ret == -1) ? NULL : return_string(info->term));
+    return ((ret == -1) ? NULL : return_string(info));
 }

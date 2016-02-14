@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_check_cmd.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 17:57:47 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/14 17:58:04 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/14 18:49:50 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,24 +124,25 @@ int         check_cmd(char *cmd)
     return ((f_bracket || f_quote) ? 0 : 1);
 }
 
-char        *return_char(t_info *info, int term)
+char        *return_char(t_info *info)
 {
-    char *ret;
-    char *tmp;
-    char *tmp2;
+    char            *tmp;
+    t_termcaps      *term;
+    static int      level;
 
-    ret = (term) ? termcaps_loop(info) : getnextline(0, info);
-    while (!check_cmd(ret))
+    term = info->term;
+    tmp = term->cmd;
+    if (!level)
     {
-        tmp = ft_strdup(info->term->cmd);
-        if (info->term->is_term)
-            ft_bzero(info->term->cmd, BUFFER_SIZE);
-        info->term->pos_c = 0;
-        tmp2 = (term) ? termcaps_loop(info) : getnextline(0, info);
-        ret = ft_strjoin(tmp, tmp2);
-        free(tmp);
-        free(tmp2);
+        while (!check_cmd(tmp))
+        {
+            tmp = ft_strdup(term->cmd);
+            ft_bzero(term->cmd, BUFFER_SIZE);
+            term->pos_c = 0;
+            ++level;
+            tmp = ft_strjoin(tmp, termcaps_loop(info));
+        }
     }
-    info->term->cmd = ret;
-    return (ret);
+    level = 0;
+    return (tmp);
 }
