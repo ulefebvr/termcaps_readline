@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/07 20:07:11 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/13 00:02:01 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,5 @@ int         termcaps_print(t_info *info, char *cmd, long chr);
 t_capa      *termcap_capainit(void);
 int         termcap_winsz_x(void);
 int         termcap_winsz_y(void);
+
+int         check_cmd(char *cmd);
