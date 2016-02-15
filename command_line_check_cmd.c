@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 17:57:47 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/14 23:45:27 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/16 00:40:14 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,24 @@ int         ft_getflag(char c, int *b)
 
 int         ft_isclose(char c, int *b, char type, int *fqb)
 {
-    int i;
+    int     i;
+    int     j;
+    char    *delim;
 
-    i = -1;
-    if (type == 'q')
+    i = type == 'q' ? 0 : 3;
+    j = 0;
+    delim = ft_strdup("\'\"`)]}");
+    while (j++ < 3)
     {
-        if (b[0] && c == '\'' && (i = 0))
+        if (b[i] && c == delim[i])
+        {
             *fqb -= 1;
-        if (b[1] && c == '"' && (i = 1))
-            *fqb -= 1;
-        if (b[2] && c == '`' && (i = 2))
-            *fqb -= 1;
+            b[i] = 0;
+            break ;
+        }
+        i++;
     }
-    else
-    {
-        if (b[3] && c == ')' && (i = 3))
-            *fqb -= 1;
-        if (b[4] && c == ']' && (i = 4))
-            *fqb -= 1;
-        if (b[5] && c == '}' && (i = 5))
-            *fqb -= 1;
-    }
-    b[i] = 0;
+    free(delim);
     return (0);
 }
 
@@ -116,14 +112,14 @@ int         check_cmd(char *cmd)
             i++;
             continue;
         }
-        else if (ft_fbracket(b) && !ft_isclose(cmd[i], b, 'b', &f_bracket))
+        if (ft_isquote(cmd[i]) && ft_getflag(cmd[i], b))
+            f_quote++;
+        if (ft_fbracket(b) && !ft_isclose(cmd[i], b, 'b', &f_bracket))
         {
             i++;
             continue;
         }
-        if (ft_isquote(cmd[i]) && ft_getflag(cmd[i], b))
-            f_quote++;
-        else if (ft_isbracket(cmd[i]) && ft_getflag(cmd[i], b))
+        if (ft_isbracket(cmd[i]) && ft_getflag(cmd[i], b))
             f_bracket++;
         i++;
     }
