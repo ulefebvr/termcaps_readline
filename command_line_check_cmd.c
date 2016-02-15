@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_check_cmd.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 17:57:47 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/14 18:49:50 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/14 23:45:27 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,25 @@ typedef struct s_bracket
     int cbracket;
 }               t_bracket;
 
-int         ft_fquote(t_bracket *b)
+/**
+*   int *b
+*
+*   [0] quote
+*   [1] dquote
+*   [2] mquote
+*   [3] parenthese
+*   [4] bracket
+*   [5] cbracket
+**/
+
+int         ft_fquote(int *b)
 {
-    return (b->f_quote || b->f_dquote || b->f_mquote);
+    return (b[0] || b[1] || b[2]);
 }
 
-int         ft_fbracket(t_bracket *b)
+int         ft_fbracket(int *b)
 {
-    return (b->parenthese || b->bracket || b->cbracket);
+    return (b[3] || b[4] || b[5]);
 }
 
 int         ft_isquote(char c)
@@ -43,47 +54,48 @@ int         ft_isbracket(char c)
     return (c == '{' || c == '[' || c == '(');
 }
 
-int         ft_getflag(char c, t_bracket *b)
+int         ft_getflag(char c, int *b)
 {
     if (c == '\'')
-        b->f_quote = 1;
+        b[0] = 1;
     else if (c == '"')
-        b->f_dquote = 1;
+        b[1] = 1;
     else if (c == '`')
-        b->f_mquote = 1;
+        b[2] = 1;
     else if (c == '(')
-        b->parenthese = 1;
+        b[3] = 1;
     else if (c == '[')
-        b->bracket = 1;
+        b[4] = 1;
     else if (c == '{')
-        b->cbracket = 1;
+        b[5] = 1;
     return (1);
 }
 
-int         ft_isclose(char c, t_bracket *b, char type, int *fqb)
+int         ft_isclose(char c, int *b, char type, int *fqb)
 {
-        if (type == 'q')
-        {
-            if (b->f_quote && c == '\'')
-            {
-                *fqb -= 2;
-                return (b->f_quote = 0, 1);
-            }
-            if (b->f_dquote && c == '"')
-                return (1);
-            if (b->f_mquote && c == '`')
-                return (1);
-        }
-        else
-        {
-            if (b->parenthese && c == ')')
-                return (1);
-            if (b->bracket && c == ']')
-                return (1);
-            if (b->cbracket && c == '}')
-                return (1);
-        }
-        return (0);
+    int i;
+
+    i = -1;
+    if (type == 'q')
+    {
+        if (b[0] && c == '\'' && (i = 0))
+            *fqb -= 1;
+        if (b[1] && c == '"' && (i = 1))
+            *fqb -= 1;
+        if (b[2] && c == '`' && (i = 2))
+            *fqb -= 1;
+    }
+    else
+    {
+        if (b[3] && c == ')' && (i = 3))
+            *fqb -= 1;
+        if (b[4] && c == ']' && (i = 4))
+            *fqb -= 1;
+        if (b[5] && c == '}' && (i = 5))
+            *fqb -= 1;
+    }
+    b[i] = 0;
+    return (0);
 }
 
 int         check_cmd(char *cmd)
@@ -91,33 +103,27 @@ int         check_cmd(char *cmd)
     int       i;
     int       f_quote;
     int       f_bracket;
-    t_bracket b;
+    int       b[6];
 
     i = 0;
     f_quote = 0;
     f_bracket = 0;
-    b.f_quote = 0;
-    b.f_dquote = 0;
-    b.f_mquote = 0;
-    b.parenthese = 0;
-    b.bracket = 0;
-    b.cbracket = 0;
+    ft_bzero(b, (sizeof(int) * 6));
     while (cmd[i])
     {
-        if (ft_fquote(&b) && !ft_isclose(cmd[i], &b, 'q', &f_quote))
+        if (ft_fquote(b) && !ft_isclose(cmd[i], b, 'q', &f_quote))
         {
             i++;
             continue;
         }
-        else if (ft_fbracket(&b) && !ft_isclose(cmd[i], &b, 'b', &f_bracket))
+        else if (ft_fbracket(b) && !ft_isclose(cmd[i], b, 'b', &f_bracket))
         {
             i++;
-            f_bracket--;
             continue;
         }
-        if (ft_isquote(cmd[i]) && ft_getflag(cmd[i], &b))
+        if (ft_isquote(cmd[i]) && ft_getflag(cmd[i], b))
             f_quote++;
-        else if (ft_isbracket(cmd[i]) && ft_getflag(cmd[i], &b))
+        else if (ft_isbracket(cmd[i]) && ft_getflag(cmd[i], b))
             f_bracket++;
         i++;
     }
@@ -126,23 +132,28 @@ int         check_cmd(char *cmd)
 
 char        *return_char(t_info *info)
 {
+    char            *ret;
     char            *tmp;
     t_termcaps      *term;
     static int      level;
 
     term = info->term;
-    tmp = term->cmd;
+    ret = term->cmd;
+    tmp = NULL;
     if (!level)
     {
-        while (!check_cmd(tmp))
+        while (!check_cmd(ret))
         {
-            tmp = ft_strdup(term->cmd);
+            tmp = ft_strdup(ret);
+            if (level)
+                free(ret);
             ft_bzero(term->cmd, BUFFER_SIZE);
             term->pos_c = 0;
             ++level;
-            tmp = ft_strjoin(tmp, termcaps_loop(info));
+            ret = ft_strjoin(tmp, termcaps_loop(info));
+            free(tmp);
         }
+        level = 0;
     }
-    level = 0;
-    return (tmp);
+    return (ret);
 }
