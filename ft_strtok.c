@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/28 15:12:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/28 15:38:12 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/15 16:39:36 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/15 17:37:34 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 #include <unistd.h>
 
-extern char **environ;
-
-char        *ft_getenv(char *var)
+char	*ft_strtok(char *s, const char *delim)
 {
-    char    **env;
-    int     len;
+	static char		*last;
 
-    len = ft_strlen(var);
-    env = environ;
-    while (env && *env)
-    {
-        if ((!ft_strncmp(var, *env, len)) && ((*env)[len] == '='))
-            return (ft_strdup(&(*env)[len + 1]));
-        env++;
-    }
-    return (NULL);
+	if (s == NULL && (s = last) == NULL)
+		return (NULL);
+	if (ft_strstr(s, delim))
+	{
+
+	}
+	else
+	{
+		last = NULL;
+		return (s);
+	}
+	return (NULL);
 }
