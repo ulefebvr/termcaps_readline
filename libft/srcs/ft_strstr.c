@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 15:51:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2015/09/18 15:10:17 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/15 17:23:45 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ char	*ft_strstr(const char *meule_de_foin, const char *aiguille)
 
 	a = 0;
 	b = 0;
-	if (!aiguille)
-		return ((char*)meule_de_foin);
-	if (*aiguille == 0)
+	if (!aiguille || !*aiguille)
 		return ((char*)meule_de_foin);
 	while (meule_de_foin[a])
 	{
