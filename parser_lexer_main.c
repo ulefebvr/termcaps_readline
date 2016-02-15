@@ -6,12 +6,12 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:47:57 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/15 18:39:12 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/16 00:23:12 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// #include "parser_dictionnary.h"
+#include "parser_dictionnary.h"
 
 char		*ft_strndup(char *str, size_t size)
 {
@@ -40,23 +40,52 @@ char		*ft_strchrtab(char *str, char *delim)
 	return (NULL);
 }
 
+t_parse		*ft_lexer(char *str, char *token)
+{
+	char	*tmp;
+	t_parse	*node;
+
+	node = NULL;
+	if (str && *str)
+	{
+		node = (t_parse *)malloc(sizeof(t_parse));
+		ft_bzero(node, sizeof(t_parse));
+		if (tmp = ft_strchrtab(str, TOKENS))
+		{
+			node->value = ft_strndup(str, (tmp - str) ? tmp - str : 1);
+			node->next = ft_lexer((tmp - str) ? tmp : ++tmp, token);
+		}
+		else
+		{
+			node->value = ft_strdup(str);
+			node->next = ft_lexer(NULL, token);
+		}
+	}
+	return (node);
+}
+
+void		free_list(t_parse *begin)
+{
+	if (begin)
+	{
+		free_list(begin->next);
+		free(begin->value);
+		free(begin);
+	}
+}
+
 int main(void)
 {
-	char *tmp = "ls -l ' echo ' fouwe >\\<ouh ";
-	char *tmp2;
-	char *tmp3;
-	int i = 0;
+	char *tmp1 = "ls -l \' ec:\"ho while \' fo\"uwe >\\<ouh |while test 1 | && jjd";
 
-	ft_print("%s\n", tmp);
-	// while ((tmp2 = ft_strchr(tmp, '\'')))
-	while ((tmp2 = ft_strchrtab(tmp, "\'><\\")))
+	ft_print("%s\n", tmp1);
+
+	t_parse *begin = ft_lexer(tmp1, TOKENS);
+	t_parse *tmp = begin;
+	while (tmp)
 	{
-		tmp3 = ft_strndup(tmp, (tmp2 - tmp) ? tmp2 - tmp : 1);
-		ft_print("%s\n", tmp3);
-		free(tmp3);
-		tmp = (tmp2 - tmp) ? tmp2 : ++tmp2;
-		if (++i > 10)
-			break;
+		ft_print("[%s]\n", tmp->value);
+		tmp = tmp->next;
 	}
-	ft_print("%s\n", tmp);
+	free_list(begin);
 }
