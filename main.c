@@ -6,12 +6,13 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 14:57:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/07 18:49:42 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/16 12:44:32 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
 #include "libft.h"
+#include "parser_dictionnary.h"
 
 #include <unistd.h>
 #include <stdio.h>
@@ -49,8 +50,19 @@ int main(void) {
 
     char *command;
     while ((command = termcaps_readline(&info)))
+    // t_parse *begin;
+    // while ((begin = termcaps_readline(&info)))
     {
-        ft_print("%s\n", command);
+        t_parse *begin = ft_lexer(command);
+    	t_parse *tmp = begin;
+    	while (tmp)
+    	{
+    		ft_print("[%s]\n", tmp->value);
+    		tmp = tmp->next;
+    	}
+    	free_list(begin);
+
+        // ft_print("%s\n", command);
         if (info.term->is_term)
             ft_bzero(info.term->cmd, BUFFER_SIZE);
         else

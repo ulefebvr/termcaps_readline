@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:47:57 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/16 00:23:12 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/16 14:08:19 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char		*ft_strchrtab(char *str, char *delim)
 	return (NULL);
 }
 
-t_parse		*ft_lexer(char *str, char *token)
+t_parse		*lexer_syntax_highlight(char *str, char *token)
 {
 	char	*tmp;
 	t_parse	*node;
@@ -53,15 +53,24 @@ t_parse		*ft_lexer(char *str, char *token)
 		if (tmp = ft_strchrtab(str, TOKENS))
 		{
 			node->value = ft_strndup(str, (tmp - str) ? tmp - str : 1);
-			node->next = ft_lexer((tmp - str) ? tmp : ++tmp, token);
+			node->next = lexer_syntax_highlight((tmp - str) ? tmp : ++tmp, token);
 		}
 		else
 		{
 			node->value = ft_strdup(str);
-			node->next = ft_lexer(NULL, token);
+			node->next = lexer_syntax_highlight(NULL, token);
 		}
 	}
 	return (node);
+}
+
+t_parse		*ft_lexer(char *str)
+{
+	t_parse	*cmd;
+
+	cmd = lexer_syntax_highlight(str, TOKENS);
+	cmd = lexer_quotes(&cmd);
+	return (cmd);
 }
 
 void		free_list(t_parse *begin)
@@ -74,18 +83,18 @@ void		free_list(t_parse *begin)
 	}
 }
 
-int main(void)
-{
-	char *tmp1 = "ls -l \' ec:\"ho while \' fo\"uwe >\\<ouh |while test 1 | && jjd";
-
-	ft_print("%s\n", tmp1);
-
-	t_parse *begin = ft_lexer(tmp1, TOKENS);
-	t_parse *tmp = begin;
-	while (tmp)
-	{
-		ft_print("[%s]\n", tmp->value);
-		tmp = tmp->next;
-	}
-	free_list(begin);
-}
+// int main(void)
+// {
+// 	char *tmp1 = "ls -l \' ec:\"ho while \' fo\"uwe >\\<ouh |while test 1 | && jjd";
+//
+// 	ft_print("%s\n", tmp1);
+//
+// 	t_parse *begin = ft_lexer(tmp1, TOKENS);
+// 	t_parse *tmp = begin;
+// 	while (tmp)
+// 	{
+// 		ft_print("[%s]\n", tmp->value);
+// 		tmp = tmp->next;
+// 	}
+// 	free_list(begin);
+// }
