@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_lexer_main.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:47:57 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/16 14:08:19 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/16 22:25:08 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_parse		*lexer_syntax_highlight(char *str, char *token)
 	{
 		node = (t_parse *)malloc(sizeof(t_parse));
 		ft_bzero(node, sizeof(t_parse));
-		if (tmp = ft_strchrtab(str, TOKENS))
+		if ((tmp = ft_strchrtab(str, TOKENS)))
 		{
 			node->value = ft_strndup(str, (tmp - str) ? tmp - str : 1);
 			node->next = lexer_syntax_highlight((tmp - str) ? tmp : ++tmp, token);
