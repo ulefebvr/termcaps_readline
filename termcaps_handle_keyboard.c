@@ -31,7 +31,10 @@ t_key g_key_tab[] =
   {CTRL_UP, move_line_up},
   {CTRL_DOWN, move_line_down},
   {CTRL_RIGHT, move_word_right},
-  {CTRL_LEFT, move_word_left}
+  {CTRL_LEFT, move_word_left},
+  {CTRL_I, cut_line},
+  {CTRL_O, copy_line},
+  {CTRL_P, paste_line}
 };
 
 int     add_chr(t_info *info, long chr)
@@ -67,7 +70,7 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    while (++i < 14)
+    while (++i < 17)
     {
        if (g_key_tab[i].key == chr)
        {

@@ -26,6 +26,7 @@ typedef struct          s_termcaps
     struct s_capa       *capa;
     char                *prompt;
     char                *cmd;
+    char                *save_cmd;
     int                 pos_c;
 }                       t_termcaps;
 
@@ -63,6 +64,9 @@ void        move_line_up(t_info *info);
 void        move_line_down(t_info *info);
 void        move_word_left(t_info *info);
 void        move_word_right(t_info *info);
+void	    cut_line(t_info *info);
+void	    copy_line(t_info *info);
+void	    paste_line(t_info *info);
 
 void        move_cursor(t_capa *capa, int from, int plen, int to);
 
