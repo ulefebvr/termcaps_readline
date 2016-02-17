@@ -1,0 +1,22 @@
+
+
+
+
+
+
+
+echo 'yolo "yolo" yolo' "swag\""
+
+[STR]		echo
+[SQTE]		'
+[STR]		yolo
+[CHR]		"
+[STR]		yolo
+[CHR]		"
+[STR]		yolo
+[SQTE]		'
+[DQTE]		"
+[STR]		swag
+[BSLH]		\
+[CHR]		"
+[DQTE]		"

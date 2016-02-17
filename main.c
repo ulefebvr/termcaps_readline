@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 14:57:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/16 12:44:32 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/17 00:36:58 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(void) {
     	t_parse *tmp = begin;
     	while (tmp)
     	{
-    		ft_print("[%s]\n", tmp->value);
+    		ft_print("[%d][%s]\n", tmp->key, tmp->value);
     		tmp = tmp->next;
     	}
     	free_list(begin);

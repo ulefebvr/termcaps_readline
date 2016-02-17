@@ -6,25 +6,25 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:57:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/16 17:15:42 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/17 00:32:24 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser_dictionnary.h"
 
-t_parse			*make_string(t_parse *list/*t_rules*/)
+t_parse			*group_nodes(t_parse *list, char *key, int value)
 {
     t_parse		*tmp;
     t_parse		*tmp2;
     int			ret;
 
-	list->key = 5;
+	list->key = value;
     tmp = list->next;
     ft_memdel((void **)&list->value);
     while (tmp)
     {
-        if ((ret = ft_strcmp(tmp->value, "'")))
+        if ((ret = ft_strcmp(tmp->value, key)))
             list->value = ft_strjoin(list->value, tmp->value);
         tmp2 = tmp->next;
         free(tmp->value);
@@ -36,7 +36,7 @@ t_parse			*make_string(t_parse *list/*t_rules*/)
 	return (list);
 }
 
-t_parse		*lexer_quotes(t_parse **cmd/*t_rules*/)
+t_parse			*lexer_group(t_parse **cmd, char *skey, char *ekey, int value)
 {
 	t_parse	*begin;
 	t_parse	*tmp;
@@ -45,9 +45,9 @@ t_parse		*lexer_quotes(t_parse **cmd/*t_rules*/)
 	tmp = begin;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->value, "'"))
+		if (!ft_strcmp(tmp->value, skey))
 		{
-			make_string(tmp);
+			group_nodes(tmp, ekey, value);
 		}
 		tmp = tmp->next;
 	}
