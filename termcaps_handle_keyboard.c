@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_handle_keyboard.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/07 20:11:43 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/17 19:08:12 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ t_key g_key_tab[] =
   {KEY_END, move_end},
   {KEY_DEL, move_delete},
   {KEY_SUPP, move_supp},
-  {CTRL_U, keyboard_clear_line},
-  {CTRL_L, keyboard_clear_screen},
+  {CTRL_U, move_clear_left},
+  {CTRL_K, move_clear_right},
+  {CTRL_L, move_clear_screen},
   {CTRL_UP, move_line_up},
   {CTRL_DOWN, move_line_down},
   {CTRL_RIGHT, move_word_right},
@@ -67,7 +68,7 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    while (++i < 14)
+    while (++i < 15)
     {
        if (g_key_tab[i].key == chr)
        {

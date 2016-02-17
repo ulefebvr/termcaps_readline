@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_keys.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:34:55 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/07 20:14:36 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/17 17:55:35 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 
 # define CTRL_U				21
 # define CTRL_L				12
+# define CTRL_K				11
 
 # ifdef __APPLE__
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_termcaps.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/07 20:07:11 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/17 17:45:12 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ typedef struct          s_capa
     char                *str_ho;
 }                       t_capa;
 
-void        move_cursor_left(t_info *info);
-void        move_cursor_right(t_info *info);
-void        move_start(t_info *info);
-void        move_end(t_info *info);
-void        move_delete(t_info *info);
-void        move_supp(t_info *info);
-void        keyboard_clear_line(t_info *info);
-void        keyboard_clear_screen(t_info *info);
-void        move_line_up(t_info *info);
-void        move_line_down(t_info *info);
-void        move_word_left(t_info *info);
-void        move_word_right(t_info *info);
+void		move_cursor_left(t_info *info);
+void		move_cursor_right(t_info *info);
+void		move_start(t_info *info);
+void		move_end(t_info *info);
+void		move_delete(t_info *info);
+void		move_supp(t_info *info);
+void		move_clear_left(t_info *info);
+void		move_clear_right(t_info *info);
+void		move_clear_screen(t_info *info);
+void		move_line_up(t_info *info);
+void		move_line_down(t_info *info);
+void		move_word_left(t_info *info);
+void		move_word_right(t_info *info);
 
 void        move_cursor(t_capa *capa, int from, int plen, int to);
 
