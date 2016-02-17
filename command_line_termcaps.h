@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_termcaps.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/14 18:48:25 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/16 23:01:54 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define     BUFFER_SIZE     1024
 #define     NL              10
 #define     CTRL_D          4
+
+typedef struct          s_bracket
+{
+    int                 f_quote;
+    int                 f_dquote;
+    int                 f_mquote;
+    int                 parenthese;
+    int                 bracket;
+    int                 cbracket;
+}                       t_bracket;
 
 typedef struct          s_info
 {
@@ -78,6 +88,11 @@ t_capa      *termcap_capainit(void);
 int         termcap_winsz_x(void);
 int         termcap_winsz_y(void);
 char        *getnextline(int fd, t_info *info);
+
+int         ft_fquote(int *b);
+int         ft_fbracket(int *b);
+int         ft_isquote(char c);
+int         ft_isbracket(char c);
 
 int         check_cmd(char *cmd);
 char        *return_char(t_info *info);

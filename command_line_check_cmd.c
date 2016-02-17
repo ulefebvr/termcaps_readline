@@ -6,22 +6,12 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 17:57:47 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/16 00:40:14 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/16 23:01:11 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "command_line_termcaps.h"
-
-typedef struct s_bracket
-{
-    int f_quote;
-    int f_dquote;
-    int f_mquote;
-    int parenthese;
-    int bracket;
-    int cbracket;
-}               t_bracket;
 
 /**
 *   int *b
@@ -33,26 +23,6 @@ typedef struct s_bracket
 *   [4] bracket
 *   [5] cbracket
 **/
-
-int         ft_fquote(int *b)
-{
-    return (b[0] || b[1] || b[2]);
-}
-
-int         ft_fbracket(int *b)
-{
-    return (b[3] || b[4] || b[5]);
-}
-
-int         ft_isquote(char c)
-{
-    return (c == '\'' || c == '"' || c == '`');
-}
-
-int         ft_isbracket(char c)
-{
-    return (c == '{' || c == '[' || c == '(');
-}
 
 int         ft_getflag(char c, int *b)
 {
@@ -107,18 +77,12 @@ int         check_cmd(char *cmd)
     ft_bzero(b, (sizeof(int) * 6));
     while (cmd[i])
     {
-        if (ft_fquote(b) && !ft_isclose(cmd[i], b, 'q', &f_quote))
-        {
-            i++;
+        if (ft_fquote(b) && !ft_isclose(cmd[i], b, 'q', &f_quote) && i++)
             continue;
-        }
         if (ft_isquote(cmd[i]) && ft_getflag(cmd[i], b))
             f_quote++;
-        if (ft_fbracket(b) && !ft_isclose(cmd[i], b, 'b', &f_bracket))
-        {
-            i++;
+        if (ft_fbracket(b) && !ft_isclose(cmd[i], b, 'b', &f_bracket) && i++)
             continue;
-        }
         if (ft_isbracket(cmd[i]) && ft_getflag(cmd[i], b))
             f_bracket++;
         i++;

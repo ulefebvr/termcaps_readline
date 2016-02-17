@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:47:57 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/17 00:39:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/17 01:14:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_parse		*lexer_syntax_highlight(char *str, char *token)
 	{
 		node = (t_parse *)malloc(sizeof(t_parse));
 		ft_bzero(node, sizeof(t_parse));
-		if (tmp = ft_strchrtab(str, TOKENS))
+		if ((tmp = ft_strchrtab(str, TOKENS)))
 		{
 			node->value = ft_strndup(str, (tmp - str) ? tmp - str : 1);
 			node->next = lexer_syntax_highlight((tmp - str) ? tmp : ++tmp, token);

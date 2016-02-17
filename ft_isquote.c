@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   ft_isquote.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/15 16:39:36 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/16 22:58:00 by zipo             ###   ########.fr       */
+/*   Created: 2016/02/16 22:59:17 by zipo              #+#    #+#             */
+/*   Updated: 2016/02/16 23:02:27 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <libft.h>
+#include "command_line_termcaps.h"
 
-char	*ft_strtok(char *s, const char *delim)
+int         ft_fquote(int *b)
 {
-	static char		*last;
+    return (b[0] || b[1] || b[2]);
+}
 
-	if (s == NULL && (s = last) == NULL)
-		return (NULL);
-	if (ft_strstr(s, delim))
-	{
-		;
-	}
-	else
-	{
-		last = NULL;
-		return (s);
-	}
-	return (NULL);
+int         ft_fbracket(int *b)
+{
+    return (b[3] || b[4] || b[5]);
+}
+
+int         ft_isquote(char c)
+{
+    return (c == '\'' || c == '"' || c == '`');
+}
+
+int         ft_isbracket(char c)
+{
+    return (c == '{' || c == '[' || c == '(');
 }
