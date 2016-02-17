@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:34:55 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/17 01:29:41 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/17 21:25:43 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@
 
 # endif
 
-#  define SFT_ALT_X         22555
-#  define SFT_ALT_C         17179
-#  define SFT_ALT_V         22043
+#  define ALTGR_X           48066
+#  define ALTGR_C           41666
+#  define ALTGR_V           10256610
 
 #endif
