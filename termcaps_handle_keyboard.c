@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/17 21:29:07 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/17 22:40:03 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_key g_key_tab[] =
   {CTRL_DOWN, move_line_down},
   {CTRL_RIGHT, move_word_right},
   {CTRL_LEFT, move_word_left},
-  {ALTGR_X, cut_line},
-  {ALTGR_C, copy_line},
-  {ALTGR_V, paste_line}
+  {ALTGR_I, cut_line},
+  {ALTGR_O, copy_line},
+  {ALTGR_P, paste_line}
 };
 
 int     add_chr(t_info *info, long chr)

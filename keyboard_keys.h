@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:34:55 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/17 21:29:10 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/17 22:39:51 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@
 
 # endif
 
-#  define ALTGR_X           48066
-#  define ALTGR_C           41666
-#  define ALTGR_V           10256610
+#  define ALTGR_I           9
+#  define ALTGR_O           15
+#  define ALTGR_P           16
 
 #endif
