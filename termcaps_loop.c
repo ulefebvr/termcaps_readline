@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/14 18:51:04 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/16 23:58:18 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 
 #include <unistd.h>
+// #include <stdio.h>
 
 char        *return_string(t_info *info)
 {
@@ -37,6 +38,7 @@ char        *termcaps_loop(t_info *info)
     chr = 0;
     while ((ret = read(0, &chr, sizeof(chr))) > 0)
     {
+        // printf("> %ld\n", chr);
         if ((chr == NL) || (chr == CTRL_D && (ret = -1) == -1))
             break;
         termcaps_handle_keyboard(info, chr);

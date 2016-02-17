@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 14:57:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/16 12:44:32 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/17 00:05:25 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int main(void) {
     info.term->is_term = termcap_available();
     info.term->capa = termcap_capainit();
     info.term->cmd = ft_memalloc(BUFFER_SIZE);
+    info.term->save_cmd = NULL;
     // info.term->prompt = NULL;
 
     char *command;

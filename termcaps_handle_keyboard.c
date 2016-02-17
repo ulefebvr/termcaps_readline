@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/07 20:11:43 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/16 23:49:30 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ t_key g_key_tab[] =
   {CTRL_UP, move_line_up},
   {CTRL_DOWN, move_line_down},
   {CTRL_RIGHT, move_word_right},
-  {CTRL_LEFT, move_word_left}
+  {CTRL_LEFT, move_word_left},
+  {SFT_ALT_X, cut_line},
+  {SFT_ALT_C, copy_line},
+  {SFT_ALT_V, paste_line}
 };
 
 int     add_chr(t_info *info, long chr)
@@ -67,7 +70,7 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    while (++i < 14)
+    while (++i < 17)
     {
        if (g_key_tab[i].key == chr)
        {
