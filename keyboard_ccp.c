@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 23:32:36 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/17 01:28:25 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/17 10:42:09 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void    cut_line(t_info *info)
     if (info->term->save_cmd)
         free(info->term->save_cmd);
     info->term->save_cmd = ft_strdup(info->term->cmd);
+    info->term->pos_c = ft_strlen(info->term->cmd);
     keyboard_clear_line(info);
 }
 
