@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:47:57 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/17 01:14:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/17 17:15:42 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ t_parse		*ft_lexer(char *str)
 	t_parse	*cmd;
 
 	cmd = lexer_syntax_highlight(str, TOKENS);
-	cmd = lexer_group(&cmd, "'", "'", 5);
-	cmd = lexer_group(&cmd, "\"", "\"", 6);
-	cmd = lexer_group(&cmd, "(", ")", 7);
-	cmd = lexer_group(&cmd, "{", "}", 8);
-	cmd = lexer_group(&cmd, "[", "]", 9);
-	cmd = lexer_group(&cmd, "`", "`", 10);
+	// cmd = lexer_group(&cmd, "'", "'", 5);
+	// cmd = lexer_group(&cmd, "\"", "\"", 6);
+	// cmd = lexer_group(&cmd, "(", ")", 7);
+	// cmd = lexer_group(&cmd, "{", "}", 8);
+	// cmd = lexer_group(&cmd, "[", "]", 9);
+	// cmd = lexer_group(&cmd, "`", "`", 10);
+	parser_attr_keys(cmd, rules_backslash);
+	parser_attr_keys(cmd, rules_quotes);
 	return (cmd);
 }
 
