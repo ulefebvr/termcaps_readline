@@ -74,6 +74,7 @@ void		free_list(t_parse *begin)
 	}
 }
 
+/*
 int main(void)
 {
 	char *tmp1 = "ls -l \' ec:\"ho while \' fo\"uwe >\\<ouh |while test 1 | && jjd";
@@ -89,3 +90,4 @@ int main(void)
 	}
 	free_list(begin);
 }
+*/

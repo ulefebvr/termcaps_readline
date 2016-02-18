@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 17:57:47 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/16 00:40:14 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/18 23:10:37 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int         ft_fbracket(int *b)
     return (b[3] || b[4] || b[5]);
 }
 
-int         ft_isquote(char c)
+int         ft_isquote(char *s, int i)
 {
-    return (c == '\'' || c == '"' || c == '`');
+    return (s[i] == '\'' || s[i] == '"' || s[i] == '`');
 }
 
-int         ft_isbracket(char c)
+int         ft_isbracket(char *s, int i)
 {
-    return (c == '{' || c == '[' || c == '(');
+    return (s[i] == '{' || s[i] == '[' || s[i] == '(');
 }
 
 int         ft_getflag(char c, int *b)
@@ -105,21 +105,17 @@ int         check_cmd(char *cmd)
     f_quote = 0;
     f_bracket = 0;
     ft_bzero(b, (sizeof(int) * 6));
-    while (cmd[i])
+    while (i < ft_strlen(cmd))
     {
-        if (ft_fquote(b) && !ft_isclose(cmd[i], b, 'q', &f_quote))
-        {
-            i++;
+        if (cmd[i] == '\\' && (i += 2))
+            continue ;
+        if (ft_fquote(b) && !ft_isclose(cmd[i], b, 'q', &f_quote) && i++)
             continue;
-        }
-        if (ft_isquote(cmd[i]) && ft_getflag(cmd[i], b))
+        if (ft_isquote(cmd, i) && ft_getflag(cmd[i], b))
             f_quote++;
-        if (ft_fbracket(b) && !ft_isclose(cmd[i], b, 'b', &f_bracket))
-        {
-            i++;
+        if (ft_fbracket(b) && !ft_isclose(cmd[i], b, 'b', &f_bracket) && i++)
             continue;
-        }
-        if (ft_isbracket(cmd[i]) && ft_getflag(cmd[i], b))
+        if (ft_isbracket(cmd, i) && ft_getflag(cmd[i], b))
             f_bracket++;
         i++;
     }
