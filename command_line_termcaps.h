@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_termcaps.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/14 18:48:25 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/19 00:19:41 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define     BUFFER_SIZE     1024
+#define     HISTORY_SIZE    5
 #define     NL              10
 #define     CTRL_D          4
 
 typedef struct          s_info
 {
     struct s_termcaps   *term;
+    char                **history;
     int                 stop;
 }                       t_info;
 
@@ -81,3 +83,5 @@ char        *getnextline(int fd, t_info *info);
 
 int         check_cmd(char *cmd);
 char        *return_char(t_info *info);
+
+void        add_history(t_info *info, char *cmd);

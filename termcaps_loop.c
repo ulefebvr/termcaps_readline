@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/14 18:51:04 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/18 23:56:41 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char        *return_string(t_info *info)
         move_cursor(term->capa, term->pos_c, ft_strlen(term->prompt), len);
     ft_putstr("\n");
     tmp = return_char(info);
+    add_history(info, tmp);
     return (tmp);
 }
 
