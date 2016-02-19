@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:57:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/18 16:59:24 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/18 23:04:06 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@ t_parse			*group_nodes(t_parse *list, int key, int value)
 {
     t_parse		*tmp;
     t_parse		*tmp2;
-    char		ret;
+    int			ret;
 
+	tmp2 = NULL;
 	list->key = value;
     tmp = list->next;
     ft_memdel((void **)&list->value);
     while (tmp)
     {
-        if ((ret = (tmp->key != key)))
+        if ((ret = tmp->key) != key)
             list->value = ft_strjoin(list->value, tmp->value);
         tmp2 = tmp->next;
         free(tmp->value);
         free(tmp);
     	tmp = tmp2;
-		if (!ret && (list->next = tmp2))
+		if ((ret == key) && (list->next = tmp2))
 			break;
     }
 	return (tmp2);

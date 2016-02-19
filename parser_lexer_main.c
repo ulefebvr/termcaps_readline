@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:47:57 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/18 15:31:11 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/18 23:58:34 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,12 @@ t_parse		*ft_lexer(char *str)
 	cmd = lexer_syntax_highlight(str, TOKENS);
 	parser_attr_keys(cmd, rules_backslash);
 	parser_attr_keys(cmd, rules_quotes);
-	lexer_group(cmd, SQTE, SQTE, STR);
+	parser_attr_keys(cmd, rules_priority);
+	lexer_group(cmd, SQTE, SQTE, STR_S);
+	lexer_group(cmd, DQTE, DQTE, STR_D);
+	lexer_group(cmd, CRHT, CRHT, STR_S);
+	lexer_group(cmd, ACLD, ACLD, STR_S);
+	lexer_group(cmd, PRTH, PRTH, STR_S);
 	return (cmd);
 }
 
@@ -84,19 +89,3 @@ void		free_list(t_parse *begin)
 		free(begin);
 	}
 }
-
-// int main(void)
-// {
-// 	char *tmp1 = "ls -l \' ec:\"ho while \' fo\"uwe >\\<ouh |while test 1 | && jjd";
-//
-// 	ft_print("%s\n", tmp1);
-//
-// 	t_parse *begin = ft_lexer(tmp1, TOKENS);
-// 	t_parse *tmp = begin;
-// 	while (tmp)
-// 	{
-// 		ft_print("[%s]\n", tmp->value);
-// 		tmp = tmp->next;
-// 	}
-// 	free_list(begin);
-// }
