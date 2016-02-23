@@ -3,25 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/07 21:36:35 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/23 18:47:51 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
 #include "libft.h"
+#include "parser.h"
 
 #include <unistd.h>
 
+void 		show_tree(t_tree *tree)
+{
+	if (tree)
+	{
+		ft_print("{%d;%s}\n", tree->type, tree->elem);
+		show_tree(tree->left);
+		show_tree(tree->right);
+		free(tree->elem);
+		free(tree);
+	}
+}
+
 char        *return_string(t_termcaps *term)
 {
-    int len;
+    int		len;
+	t_tree	*tree;
 
     if ((len = ft_strlen(term->cmd)) != term->pos_c)
         move_cursor(term->capa, term->pos_c, ft_strlen(term->prompt), len);
     ft_putstr("\n");
+	tree = parser_cmd(term->cmd);
+	show_tree(tree);
     return (term->cmd);
 }
 
