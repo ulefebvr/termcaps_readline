@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/23 18:54:00 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/24 16:45:40 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ int			pass_string(char *cmd, int i)
 	return (ret);
 }
 
+int			pass_grouping(char *cmd, int i)
+{
+	char	c;
+
+	if (cmd[i] == '(')
+	{
+		c = ')';
+		while (cmd[++i] && cmd[i] != c && cmd[i - 1] != '\\');
+	}
+	return (i);
+}
+
 char		**split_on_highest(char *cmd, int *type)
 {
 	int		i;
@@ -63,6 +75,10 @@ char		**split_on_highest(char *cmd, int *type)
 		{
 			if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\')
 				i = pass_string(cmd, i);
+			else if (cmd[i] == '(')
+				i = pass_grouping(cmd, i);
+			else if (!ft_strncmp(">&", &cmd[i], 2))
+				i += 2;
 			else if (check_hightest(&cmd[i], type))
 				tab = split_on(cmd, &cmd[i] - cmd, *type);
 			++i;
@@ -91,7 +107,7 @@ t_tree		*parser_cmd(char *cmd)
 			free_tab(tab);
 		}
 		else
-			node->elem = ft_strdup(cmd);
+			node->elem = ft_strtrimb(cmd);
 	}
 	return (node);
 }

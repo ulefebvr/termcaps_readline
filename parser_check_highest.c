@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:08:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/23 18:45:18 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/24 16:48:15 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@
 t_parse g_parse[] =
 {
 	{1, check_op_comma, parse_op_comma},
-	{2, check_op_parentheses, parse_op_parentheses},
+	{2, check_op_and, parse_op_and},
+	{3, check_op_or, parse_op_or},
+	{4, check_op_pipe, parse_op_pipe},
+	{5, check_op_right, parse_op_right},
+	{6, check_op_left, parse_op_left},
+	{7, check_op_dright, parse_op_dright},
+	{8, check_op_dleft, parse_op_dleft},
 	{0, NULL, NULL}
 };
 
@@ -48,10 +54,6 @@ char		**split_on(char *cmd, int pos, int type)
 {
 	char	**tab;
 
-	tab = NULL;
-	if ((tab = (char **)malloc(sizeof(char *) * 4)))
-	{
-		tab = g_parse[type - 1].parse(cmd, pos);
-	}
+	tab = g_parse[type - 1].parse(cmd, pos);
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 17:54:59 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/23 18:43:30 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/24 16:21:27 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char		**parse_op_left(char *str, int pos)
 		tab[0] = ft_strndup(str, pos);
 		tab[1] = ft_strdup("<");
 		tab[2] = ft_strdup(&str[pos + 1]);
+		tab[3] = NULL;
 	}
 	return (tab);
 }
@@ -47,6 +48,7 @@ char		**parse_op_dleft(char *str, int pos)
 		tab[0] = ft_strndup(str, pos);
 		tab[1] = ft_strdup("<<");
 		tab[2] = ft_strdup(&str[pos + 2]);
+		tab[3] = NULL;
 	}
 	return (tab);
 }

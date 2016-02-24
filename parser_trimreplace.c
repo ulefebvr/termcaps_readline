@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_op_comma.c                                  :+:      :+:    :+:   */
+/*   parser_trimreplace.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/23 16:20:44 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:21:21 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/24 15:30:38 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/24 15:45:03 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
-int			check_op_comma(char *str)
+int		ft_blank(char c)
 {
-	return ((str && *str && *str == ';') ? 1 : 0);
+	if (c == ' ' || c == '\n' || c == '\t')
+		return (1);
+	return (0);
 }
 
-char		**parse_op_comma(char *str, int pos)
+char	*ft_strtrimb(char *s)
 {
-	char	**tab;
+	char	*ret;
+	char	*tmp;
 
-	tab = NULL;
-	if ((tab = (char **)malloc(sizeof(char *) * 4)))
+	ret = s;
+	tmp = &(s[ft_strlen(s) - 1]);
+	if (s && *s)
 	{
-		tab[0] = ft_strndup(str, pos);
-		tab[1] = ft_strdup(";");
-		tab[2] = ft_strdup(&str[pos + 1]);
-		tab[3] = NULL;
+		while (s && ft_blank(*s))
+			s++;
+		while (tmp >= s && ft_blank(*tmp))
+			tmp--;
+		if (tmp - s)
+		{
+			ret = ft_memalloc(tmp - s + 1);
+			ft_bzero(ret, tmp - s + 1);
+			ft_memcpy(ret, s, tmp - s + 1);
+		}
 	}
-	return (tab);
+	return (ret);
 }
