@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:04:13 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/25 12:28:39 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_tree					*parser_cmd(char *cmd);
 
 char					*ft_strtrimb(char *s);
 char					*ft_strndup(char *str, int len);
-int						check_hightest(char *cmd, int *type);
+int						check_hightest(char *cmd, int type);
 char					**split_on(char *cmd, int pos, int type);
 
 int						check_op_comma(char *str);
@@ -61,5 +61,7 @@ char					**parse_op_pipe(char *str, int pos);
 
 int						check_op_rightfd(char *str);
 char					**parse_op_rightfd(char *str, int pos);
+
+extern t_parse g_parse[];
 
 #endif

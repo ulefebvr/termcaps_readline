@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:08:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:48:15 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/25 12:36:55 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,12 @@ char		*ft_strndup(char *str, int len)
 	return (s);
 }
 
-int			check_hightest(char *cmd, int *type)
+int			check_hightest(char *cmd, int i)
 {
-	int i;
-
-	i = 0;
-	while (g_parse[i].check)
-	{
-		if (g_parse[i].check(cmd))
-			return ((*type = i + 1));
-		++i;
-	}
-	return (0);
+	return ((g_parse[i].check(cmd)) ? i + 1 : 0);
 }
 
 char		**split_on(char *cmd, int pos, int type)
 {
-	char	**tab;
-
-	tab = g_parse[type - 1].parse(cmd, pos);
-	return (tab);
+	return (g_parse[type - 1].parse(cmd, pos));
 }

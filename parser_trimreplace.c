@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:30:38 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:45:03 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/26 09:19:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ char	*ft_strtrimb(char *s)
 			tmp--;
 		if (tmp - s)
 		{
-			ret = ft_memalloc(tmp - s + 1);
-			ft_bzero(ret, tmp - s + 1);
+			ret = ft_memalloc(tmp - s + 2);
 			ft_memcpy(ret, s, tmp - s + 1);
 		}
 	}

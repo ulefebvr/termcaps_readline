@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:45:40 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/25 12:23:14 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,29 @@ int			pass_grouping(char *cmd, int i)
 char		**split_on_highest(char *cmd, int *type)
 {
 	int		i;
+	int		j;
 	char	**tab;
 
-	i = 0;
+	j = -1;
 	*type = 0;
 	tab = NULL;
 	if (cmd)
 	{
-		while (cmd[i] && !tab)
+		while (g_parse[++j].check)
 		{
-			if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\')
-				i = pass_string(cmd, i);
-			else if (cmd[i] == '(')
-				i = pass_grouping(cmd, i);
-			else if (!ft_strncmp(">&", &cmd[i], 2))
-				i += 2;
-			else if (check_hightest(&cmd[i], type))
-				tab = split_on(cmd, &cmd[i] - cmd, *type);
-			++i;
+			i = 0;
+			while (cmd[i] && !tab)
+			{
+				if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\')
+					i = pass_string(cmd, i);
+				else if (cmd[i] == '(')
+					i = pass_grouping(cmd, i);
+				else if (!ft_strncmp(">&", &cmd[i], 2))
+					i += 2;
+				else if ((*type = check_hightest(&cmd[i], j)))
+					tab = split_on(cmd, &cmd[i] - cmd, *type);
+				++i;
+			}
 		}
 	}
 	return (tab);

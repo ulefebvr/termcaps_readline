@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/23 18:47:51 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/25 14:34:37 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void 		show_tree(t_tree *tree)
 {
 	if (tree)
 	{
-		ft_print("{%d;%s}\n", tree->type, tree->elem);
 		show_tree(tree->left);
+		ft_print("{%d;%s}\n", tree->type, tree->elem);
 		show_tree(tree->right);
 		free(tree->elem);
 		free(tree);
